@@ -8,10 +8,9 @@ import { useStateContext } from '../../Contexts/ContextProvider.jsx';
 export default function Register() {
     const nameRef = useRef();
     const mbiemriRef = useRef();
-    const moshaRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
-    const pozitaRef = useRef();
+    const roliRef = useRef();
 
     const { setUser, setToken } = useStateContext();
 
@@ -20,12 +19,11 @@ export default function Register() {
         const payload = {
             name: nameRef.current.value,
             mbiemri: mbiemriRef.current.value,
-            mosha: moshaRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            pozita: pozitaRef.current.value,
+            roli: roliRef.current.value,
         };
-        console.log("Payload:", payload);  // Add this line to log the payload
+        console.log("Payload:", payload);  
         axiosClient.post('/register', payload)
             .then(({ data }) => {
                 setUser(data.user);
@@ -59,11 +57,6 @@ export default function Register() {
                                 <label>Surname</label>
                             </div>
                             <div className={styles.inputBox}>
-                                <span className={styles.icon}><ion-icon name="person"></ion-icon></span>
-                                <input ref={moshaRef} type="number" name="mosha" required />
-                                <label>Age</label>
-                            </div>
-                            <div className={styles.inputBox}>
                                 <span className={styles.icon}><ion-icon name="mail"></ion-icon></span>
                                 <input ref={emailRef} type="email" name="email" required />
                                 <label>Email</label>
@@ -73,12 +66,8 @@ export default function Register() {
                                 <input ref={passwordRef} type="password" name="password" required />
                                 <label>Password</label>
                             </div>
-                            <div className={`${styles.inputBox} ${styles.userAdmin}`} style={{ color: 'red', fontSize: '16px' }}>
-                                <span className={styles.icon} style={{ marginTop: '3px' }}><ion-icon name="person-circle-outline"></ion-icon></span>
-                                <select ref={pozitaRef} name="role" required>
-                                    <option value="Student">Student</option>
-                                    <option value="Profesor">Profesor</option>
-                                </select>
+                            <div className={`${styles.inputBox} ${styles.userAdmin}`} style={{ display: 'none' }}>
+                                <p ref={roliRef} >Student</p>
                             </div>
                             <button type="submit" name="register-submit" className={styles.buttoniLogin}>Register</button>
                         </form>
