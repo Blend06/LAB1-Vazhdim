@@ -67,7 +67,7 @@ export default function Register() {
                                 <label>Password</label>
                             </div>
                             <div className={`${styles.inputBox} ${styles.userAdmin}`} style={{ display: 'none' }}>
-                                <p ref={roliRef} >Student</p>
+                                <option ref={roliRef} >Student</option>
                             </div>
                             <button type="submit" name="register-submit" className={styles.buttoniLogin}>Register</button>
                         </form>
