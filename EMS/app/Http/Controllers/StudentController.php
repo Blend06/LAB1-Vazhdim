@@ -19,11 +19,13 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'mbiemri' => 'required|string|max:255',
-            'email' => 'required|email|unique:table_student,email',
+            'Emri' => 'required|string|max:255',
+            'Mbiemri' => 'required|string|max:255',
+            'Email' => 'required|email|unique:table_student,email',
             'password' => 'required|string|min:8',
-            'roli' => 'required|string|max:255',
+            'Roli' => 'required|string|max:255',
+            'Viti' => 'nullable|integer',
+        'Mesatarja' => 'nullable|numeric',
         ]);
 
         $student = Student::create($validatedData);
@@ -47,11 +49,13 @@ class StudentController extends Controller
         }
 
         $validatedData = $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'mbiemri' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:table_student,email,' . $id,
+            'Eame' => 'sometimes|string|max:255',
+            'Mbiemri' => 'sometimes|string|max:255',
+            'Email' => 'sometimes|email|unique:table_student,email,' . $id,
             'password' => 'sometimes|string|min:8',
-            'roli' => 'sometimes|string|max:255',
+            'Roli' => 'sometimes|string|max:255',
+            'Viti' => 'nullable|integer',
+        'Mesatarja' => 'nullable|numeric',
         ]);
 
         $student->update($validatedData);

@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('Mbiemri');
             $table->string('Email')->unique();
             $table->string('password');
-            $table->integer('Viti')->nullable();
-            $table->double('Mesatarja')->nullable();
+            $table->integer('Viti')->nullable()->default(null);
+            $table->double('Mesatarja')->nullable()->default(null);
             $table->string('Roli');
             $table->rememberToken();
             $table->timestamps();

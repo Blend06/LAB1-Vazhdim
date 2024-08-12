@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './loginregister.module.css';
 import Footer from '../../Footer.jsx';
 import axiosClient from '../../axios-client.js';
@@ -13,6 +13,7 @@ export default function Register() {
     const roliRef = useRef();
 
     const { setUser, setToken } = useStateContext();
+    const navigate = useNavigate();
 
     const onSubmit = (ev) => {
         ev.preventDefault();
@@ -21,13 +22,18 @@ export default function Register() {
             mbiemri: mbiemriRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            roli: roliRef.current.value,
+            roli: roliRef.current.value || 'Student',
         };
         console.log("Payload:", payload);  
         axiosClient.post('/register', payload)
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
+
+                if(data.token){
+                    console.log("Token set:", data.token);
+                    navigate('/');
+                }
             })
             .catch(err => {
                 const response = err.response;
@@ -38,6 +44,8 @@ export default function Register() {
                 }
             });
     };
+
+    
 
     return (
         <>

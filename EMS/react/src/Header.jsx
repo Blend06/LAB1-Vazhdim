@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { useStateContext } from './Contexts/ContextProvider.jsx';
-import { Navigate } from 'react-router-dom';
 
 function Header() {
-    const {user, token} = useStateContext()
+    const {token} = useStateContext();
+
+    useEffect(() => {
+        console.log("Token in Header updated:", token);
+    }, [token]);
+    
     return (
         <header className={`${styles.header} ${styles['d-flex']} ${styles['align-items-center']} ${styles['sticky-top']}`}>
             <div className={`${styles.container} ${styles['container-fluid']} ${styles['container-xl']} ${styles['position-relative']} ${styles['d-flex']} ${styles['align-items-center']}`}>
