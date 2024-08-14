@@ -20,16 +20,12 @@ export default function Login() {
         };
         console.log("Payload:", payload);  
         axiosClient.post('/login', payload)
-    .then(({ data }) => {
-        console.log("Response data:", data);
-        setUser(data.user);
-        setToken(data.token);  
-
-        if (data.token) {
-            console.log("Token set in Login.jsx:", data.token);
-            navigate('/');
-        }
-    })
+        .then(({ data }) => {
+            console.log("Response data:", data);
+            setUser(data.user);
+            setToken(data.token); 
+            navigate('/', { replace: true }); //to replace the current URL
+          })
     .catch(err => {
         const response = err.response;
         if (response && response.status === 422) {
