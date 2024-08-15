@@ -1,3 +1,4 @@
+// src/Login.js
 import React, { useRef } from 'react';
 import styles from './loginregister.module.css'; 
 import Footer from '../../Footer.jsx';
@@ -9,7 +10,7 @@ export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const { setUser, setToken } = useStateContext();
+    const { setUser, setToken } = useStateContext();    
     const navigate = useNavigate();
 
     const onSubmit = (ev) => {
@@ -22,9 +23,10 @@ export default function Login() {
         axiosClient.post('/login', payload)
         .then(({ data }) => {
             console.log("Response data:", data);
+            console.log("Token:", data.token);
             setUser(data.user);
-            setToken(data.token); 
-            navigate('/', { replace: true }); //to replace the current URL
+            setToken(data.token);
+            navigate('/', { replace: true });
           })
     .catch(err => {
         const response = err.response;
