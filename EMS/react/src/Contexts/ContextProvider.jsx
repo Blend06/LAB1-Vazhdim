@@ -16,14 +16,17 @@ export const ContextProvider = ({ children }) => {
         try {
             if (newToken) {
                 localStorage.setItem('ACCESS_TOKEN', newToken);
+                console.log("Token set in localStorage:", newToken);
             } else {
                 localStorage.removeItem('ACCESS_TOKEN');
+                console.log("Token removed from localStorage");
             }
             _setToken(newToken);
+            console.log("Token state updated:", newToken);
         } catch (error) {
             console.error("Error setting token:", error);
         }
-    }, [_setToken]);
+    }, []);
 
     return (
         <StateContext.Provider value={{ user, token, setUser, setToken }}>

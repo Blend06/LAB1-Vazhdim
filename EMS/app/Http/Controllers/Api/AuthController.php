@@ -27,19 +27,22 @@ class AuthController extends Controller
            return response(compact('user', 'token'));
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
 {
-    $credentials = $request->only(['Email', 'password']);
+    $credentials = $request->validated();
 
-    if (!Auth::guard('api')->attempt($credentials)) {
-        return response()->json(['error' => 'Invalid credentials'], 401);
+    if (!Auth::attempt($credentials)) {
+        return response([
+            'message' => 'Provided email address or password is incorrect']);
     }
 
-    $student = Auth::guard('api')->user();
-    $token = $student->createToken('api_token')->plainTextToken;
+        /** @var \App\Models\Student $user */
 
-    return response()->json(['token' => $token]);
-}
+        $user = Auth::user();
+        $token = $user->createToken('main')->plainTextToken;
+
+        return response(compact('user', 'token'));
+    }
 
     public function logout(Request $request){
         /** @var Student $user */
