@@ -28,7 +28,9 @@ export default function Login() {
             console.log("Response data:", data);
             console.log("Setting token:", data.token);
             setUser(data.user);
-            setToken(data.token);
+            console.log("setting user:", data.user);
+            localStorage.setItem('ACCESS_TOKEN', data.token);
+           // setToken(data.token);
             navigate('/', { replace: true });
         })
           .catch(err => {

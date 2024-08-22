@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { useStateContext } from './Contexts/ContextProvider.jsx';
 
 function Header() {
-    const {token} = useStateContext();
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    
 
     useEffect(() => {
         console.log("Token in Header updated:", token);
@@ -24,7 +25,7 @@ function Header() {
                         <li><Link to="/contact">Contact</Link></li>
                         {token ? (
                             <>
-                            <li><Link to="/dashboard">Profile</Link></li>
+                            <li><Link to="/dashboard/profile">Profile</Link></li>
                             <button>Logout</button>
                         </>
                         ) : (

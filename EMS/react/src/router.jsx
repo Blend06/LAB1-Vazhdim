@@ -5,6 +5,9 @@ import Register from "./Views/Homepage/Register";
 import Contact from "./Views/Homepage/Contact";
 import Dashboard from "./Views/Dashboard/Dashboard";
 import Aboutus from "./Views/Homepage/Aboutus";
+import Profile from "./Views/Dashboard/profile";
+import Student from './Views/Dashboard/student'; 
+
 
 const router = createBrowserRouter([
     {
@@ -25,7 +28,17 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard/>
+        element: <Dashboard/>,
+        children:[
+            {
+                path: 'profile',
+                element: <Profile/>
+            },
+            {
+                path: 'student',
+                element: <Student/>
+            }
+        ]
     },
     {
         path: '/aboutus',

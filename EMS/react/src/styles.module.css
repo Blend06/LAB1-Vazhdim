@@ -1047,3 +1047,28 @@
   margin-bottom: 100px;
   margin-right: 20px;
  }
+
+ .layout {
+  display: flex;
+  flex-direction: column;
+}
+
+
+ aside {
+  width: 240px;
+  background-color: #5b08a7;
+  padding: 1rem
+}
+
+ aside > a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+aside > a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
