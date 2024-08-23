@@ -9,7 +9,7 @@ export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const { setUser, setToken } = useStateContext();
+    const { setUser, setToken} = useStateContext();
     const navigate = useNavigate();
 
     const [error, setError] = useState(null);
@@ -26,12 +26,11 @@ export default function Login() {
         axiosClient.post('/login', payload)
         .then(({ data }) => {
             console.log("Response data:", data);
-            console.log("Setting token:", data.token);
             setUser(data.user);
-            console.log("setting user:", data.user);
-            localStorage.setItem('ACCESS_TOKEN', data.token);
-           // setToken(data.token);
-            navigate('/', { replace: true });
+           setToken(data.token);
+           
+            navigate('/');
+        
         })
           .catch(err => {
             const response = err.response;
@@ -44,6 +43,8 @@ export default function Login() {
             }
             setLoading(false);
         });
+
+        
 
     };
 

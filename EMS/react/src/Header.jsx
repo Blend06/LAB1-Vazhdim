@@ -3,16 +3,28 @@ import styles from './styles.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { useStateContext } from './Contexts/ContextProvider.jsx';
+import axiosClient from './axios-client.js';
 
 function Header() {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    
+    const {user, token, setToken, setUser} = useStateContext();
 
-    useEffect(() => {
-        console.log("Token in Header updated:", token);
-    }, [token]);
+    const onLogout = (ev) => {
+        ev.preventDefault()
+
+        axiosClient.post('/logout', {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+            }
+        })
+        .then(() => {
+            setUser({})
+            setToken(null)
+            localStorage.removeItem('token');
+        })
+    }
     
     return (
+        
         <header className={`${styles.header} ${styles['d-flex']} ${styles['align-items-center']} ${styles['sticky-top']}`}>
             <div className={`${styles.container} ${styles['container-fluid']} ${styles['container-xl']} ${styles['position-relative']} ${styles['d-flex']} ${styles['align-items-center']}`}>
             <div className={`${styles.logo} ${styles['d-flex']} ${styles['align-items-center']} ${styles['me-auto']}`}>
@@ -26,7 +38,8 @@ function Header() {
                         {token ? (
                             <>
                             <li><Link to="/dashboard/profile">Profile</Link></li>
-                            <button>Logout</button>
+                            <button onClick={onLogout}>Logout</button>
+                            {user.Emri}
                         </>
                         ) : (
                             <li><Link to="/login">Profile</Link></li>
@@ -35,6 +48,7 @@ function Header() {
                     <i className={`bi bi-list ${styles['mobile-nav-toggle']} ${styles['d-xl-none']}`}></i>
                 </nav>
             </div>
+            
         </header>
     );
 }
