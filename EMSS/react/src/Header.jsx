@@ -11,12 +11,8 @@ function Header() {
     const onLogout = (ev) => {
         ev.preventDefault()
 
-        axiosClient.post('/logout', {}, {
-            headers: {
-                'Authorization': `Bearer ${token}`, 
-            }
-        })
-        .then(() => {
+      axiosClient.post('/logout')
+        .then(() =>{
             setUser({})
             setToken(null)
             localStorage.removeItem('token');

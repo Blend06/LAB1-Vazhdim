@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 const StateContext = createContext({
-    user: {},
+    user: null,
     token: null,
     setUser: () => {},
     setToken: () => {}
@@ -10,15 +10,24 @@ const StateContext = createContext({
 
 export const ContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const [token, setToken] = useState(localStorage.getItem("ACCESS_TOKEN") || null);
+    const [token, _setToken] = useState(localStorage.getItem("ACCESS_TOKEN") || null);
 
-    useEffect(() => {
+   const setToken = (token) => {
+    _setToken(token)
+    if(token){
+        localStorage.setItem('ACCESS_TOKEN', token);
+    }else {
+        localStorage.removeItem('ACCESS_TOKEN');
+    }
+   }
+   
+    /* useEffect(() => {
         if (token) {
             localStorage.setItem("ACCESS_TOKEN", token);
         } else {
             localStorage.removeItem("ACCESS_TOKEN");
         }
-    }, [token]);
+    }, [token]); */
 
     
 

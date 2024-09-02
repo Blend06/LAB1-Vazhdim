@@ -18,11 +18,11 @@ export default function Register() {
     const onSubmit = (ev) => {
         ev.preventDefault();
         const payload = {
-            name: nameRef.current.value,
-            mbiemri: mbiemriRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            roli: roliRef.current.value || 'Student',
+            Emri: nameRef.current.value, 
+        Mbiemri: mbiemriRef.current.value,  
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        Roli: roliRef.current.value || 'Student',
         };
         console.log("Payload:", payload);  
         axiosClient.post('/register', payload)
