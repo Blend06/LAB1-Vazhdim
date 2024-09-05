@@ -2,12 +2,14 @@ import React from 'react';
 import styles from './dashboard.module.css';
 import { Link, Outlet } from 'react-router-dom';
 import Footer from '../../Footer.jsx';
+import Header from '../../Header.jsx';
 
 export default function Dashboard() {
     return  (
        <>
+       <Header /> 
        <div className={styles.layout} style={{display : 'flex'}}>
-       <aside className={styles.aside}>
+       <aside className={styles.aside} style={{ backgroundColor: '#178ca4', borderRadius: '5px' }}>
         <Link to="/dashboard/profile">Profile</Link>
         <Link to="/dashboard/student">Student</Link>
         <Link to="/dashboard/professor">Professor</Link>

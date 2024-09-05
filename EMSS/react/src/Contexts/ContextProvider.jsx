@@ -1,5 +1,6 @@
 // src/context/context.js
-import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import axiosClient from "../axios-client.js"; // Ensure this path is correct
 
 const StateContext = createContext({
     user: null,
@@ -9,31 +10,44 @@ const StateContext = createContext({
 });
 
 export const ContextProvider = ({ children }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null); // Initialize as null
     const [token, _setToken] = useState(localStorage.getItem("ACCESS_TOKEN") || null);
+    const [loading, setLoading] = useState(true); // Optional: Loading state
 
-   const setToken = (token) => {
-    _setToken(token)
-    if(token){
-        localStorage.setItem('ACCESS_TOKEN', token);
-    }else {
-        localStorage.removeItem('ACCESS_TOKEN');
-    }
-   }
-   
-    /* useEffect(() => {
+    const setToken = (token) => {
+        _setToken(token);
         if (token) {
-            localStorage.setItem("ACCESS_TOKEN", token);
+            localStorage.setItem('ACCESS_TOKEN', token);
+            axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } else {
-            localStorage.removeItem("ACCESS_TOKEN");
+            localStorage.removeItem('ACCESS_TOKEN');
+            delete axiosClient.defaults.headers.common['Authorization'];
         }
-    }, [token]); */
+    };
 
-    
+    useEffect(() => {
+        if (token) {
+            // Set the token in axios headers
+            axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            
+            // Fetch user data
+            axiosClient.get('/user')  // Ensure this endpoint is correct
+                .then(({ data }) => {
+                    setUser(data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setToken(null);  // Remove token if invalid
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
+    }, [token]);
 
     return (
         <StateContext.Provider value={{ user, token, setUser, setToken }}>
-            {children}
+            {!loading && children} {/* Render children only after loading */}
         </StateContext.Provider>
     );
 };
