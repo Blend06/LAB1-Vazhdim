@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from './Contexts/ContextProvider.jsx';
 import axiosClient from './axios-client.js';
 
@@ -16,6 +16,7 @@ function Header() {
             setUser({})
             setToken(null)
             localStorage.removeItem('token');
+            
         })
     }
     
@@ -35,7 +36,6 @@ function Header() {
                             <>
                             <li><Link to="/dashboard/profile">Profile</Link></li>
                             <button onClick={onLogout}>Logout</button>
-                            {user.Emri}
                         </>
                         ) : (
                             <li><Link to="/login">Profile</Link></li>
