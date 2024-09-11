@@ -7,6 +7,8 @@ import Dashboard from "./Views/Dashboard/Dashboard";
 import Aboutus from "./Views/Homepage/Aboutus";
 import Profile from "./Views/Dashboard/profile";
 import Student from './Views/Dashboard/student'; 
+import StudentForm from './Views/Dashboard/StudentForm'; 
+
 
 
 const router = createBrowserRouter([
@@ -37,7 +39,15 @@ const router = createBrowserRouter([
             {
                 path: 'student',
                 element: <Student/>
-            }
+            },
+            {
+                path: 'student/new',
+                element: <StudentForm key="userCreate"/>
+              },
+              {
+                path: 'student/:id',
+                element: <StudentForm key="userUpdate"/>
+              }
         ]
     },
     {
