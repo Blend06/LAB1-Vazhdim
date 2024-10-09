@@ -9,7 +9,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::apiResource('/students', StudentController::class);
+    Route::apiResource('/students', StudentController::class)->parameters([
+        'students' => 'user',
+    ]);
+    
+
 });
 
 Route::post('/register', [AuthController::class, 'register']);
