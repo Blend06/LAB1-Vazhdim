@@ -59,6 +59,15 @@ export default function Student() {
                         <th>Mesatarja</th>
                         </tr>
                     </thead>
+                    {loading && 
+                    <tbody>
+                        <tr>
+                            <td colSpan="5" className="text-center">
+                                Loading...
+                            </td>
+                        </tr>
+                    </tbody> 
+                    }
                     <tbody>
                         {users.map(u=> (
                             <tr key={u.id}>
