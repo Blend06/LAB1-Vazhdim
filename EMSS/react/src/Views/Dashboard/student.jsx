@@ -79,7 +79,7 @@ export default function Student() {
                                 <td>{u.created_at}</td>
                                 <td>{u.Mesatarja}</td>
                                 <td>
-                                    <Link className="btn btn-primary btn-sm" to={'/user/' + u.id}>Edit</Link>
+                                    <Link className="btn btn-primary btn-sm" to={'/dashboard/student/' + u.id}>Edit</Link>
                                     &nbsp;
                                     <button onClick={ev => onDelete(u)} className="btn btn-danger btn-sm">Delete</button>
                                     </td>

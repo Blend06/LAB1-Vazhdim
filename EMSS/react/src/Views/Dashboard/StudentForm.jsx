@@ -1,95 +1,124 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import axiosClient from "../../axios-client"
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosClient from "../../axios-client";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function StudentForm(){
-    const {id} = useParams();
+export default function StudentForm() {
+    const { id } = useParams();
     const navigate = useNavigate();
-    const[loading, setLoading] = useState(false)
-    const[errors, setError] = useState(null)
-    const[user, setUser] = useState({
+    const [user, setUser] = useState({
         id: null,
         Emri: '',
         Mbiemri: '',
         email: '',
         password: '',
-        password_confirmation: ''
+    });
 
-
-    })
-    if(id){
-        useEffect(() =>{
-            setLoading(true)
-            axiosClient.get(`/student/${id}`)
-            .then(({data}) =>{
-                setLoading(false)
-                setUser(data)
-            })
-            .catch(() =>{
-                setLoading(false)
-            })
-        }, [])
-    }
+    useEffect(() => {
+        if (id) {
+            axiosClient.get(`/students/${id}`)
+                .then(({ data }) => {
+                    console.log('API Response:', data);
+                    setUser({
+                        id: data.id,
+                        Emri: data.Emri,
+                        Mbiemri: data.Mbiemri,
+                        email: data.email,
+                        password: '',
+                    });
+                })
+                .catch((error) => {
+                    console.log('Error:', error);
+                });
+        }
+    }, [id]);
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        if(user.id){
-            axiosClient.put(`/users/${user.id}`, user)
-            .then(() =>{
-                navigate('/users')        
-        })
-        .catch(err => {
-            const response = err.response;
-            if (response && response.status === 422) {
-                console.log("Validation Errors:", response.data.errors);
-                setError(response.data.errors);
-            } else {
-                console.error('An unexpected error occurred:', err);
-                setError('An unexpected error occurred');
-            }
-            setLoading(false);
-        })
-    }else{
-        axiosClient.post(`/users/`, user)
-            .then(() =>{
-                navigate('/users')        
-        })
-        .catch(err => {
-            const response = err.response;
-            if (response && response.status === 422) {
-                console.log("Validation Errors:", response.data.errors);
-                setError(response.data.errors);
-            } else {
-                console.error('An unexpected error occurred:', err);
-                setError('An unexpected error occurred');
-            }
-            setLoading(false);
-        })
-    }
+        const updateData = {
+            Emri: user.Emri,
+            Mbiemri: user.Mbiemri,
+            email: user.email,
+            password: user.password,
+            Roli: 'Student',
+        };
 
-    return(
-       <>
-       {user.id && <h1>Update User: {user.name}</h1>}
-       {!user.id &&  <h1>Create User</h1>}
-       <div className="card animated fadeInDown">
-        {loading &&  (<div className="text-center">Loading...</div>)}
-        {errors && <div className="alert">
-            {Object.keys(errors).map(key => (
-                <p key={key}>{errors[key][0]}</p>
-            ))}
-        </div> }
+        console.log('Update Data:', updateData);
 
-        {!loading && 
-            <form onSubmit={onSubmit}>
-                <input value={user.Emri} onChange={ev => setUser({...user, Emri: ev.target.value})} placeholder="Emri"/>
-                <input value={user.Mbiemri} onChange={ev => setUser({...user, Mbiemri: ev.target.value})} placeholder="Mbiemri"/>
-                <input value={user.email} onChange={ev => setUser({...user, email: ev.target.value})} placeholder="Email"/>
-                <input onChange={ev => setUser({...user, Password: ev.target.value})} placeholder="Password"/>
-                <button className="btn">Save</button>
-            </form>
+        if (user.password) {
+            updateData.password = user.password;
         }
-       </div>
-       </>
-    )
-}
+
+        if (user.id) {
+            axiosClient.put(`/students/${user.id}`, updateData)
+                .then(() => {
+                    navigate('/dashboard/student');
+                })
+                .catch(err => {
+                    console.error('An error occurred:', err);
+                });
+        } else {
+            axiosClient.post(`/students/`, updateData)
+                .then(() => {
+                    navigate('/dashboard/student');
+                })
+                .catch(err => {
+                    console.error('An error occurred:', err);
+                });
+        }
+    };
+
+    return (
+        <>
+           <div className="d-flex align-items-center justify-content-center " style={{ height: '100vh' }}>
+            <div className="card animated FadeInDown" style={{ width: '400px' }}>
+                <div className="card-body">
+                    <h1 className="text-center">{user.id ? `Update User: ${user.Emri}` : 'Create User'}</h1>
+                    <form onSubmit={onSubmit} className="text-center">
+                        <div className="mb-3">
+                            <input 
+                                type="text"
+                                className="form-control"
+                                value={user.Emri} 
+                                onChange={ev => setUser({ ...user, Emri: ev.target.value })} 
+                                placeholder="Emri"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input 
+                                type="text"
+                                className="form-control"
+                                value={user.Mbiemri} 
+                                onChange={ev => setUser({ ...user, Mbiemri: ev.target.value })} 
+                                placeholder="Mbiemri" 
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input 
+                                type="email"
+                                className="form-control"
+                                value={user.email} 
+                                onChange={ev => setUser({ ...user, email: ev.target.value })} 
+                                placeholder="Email" 
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input 
+                                type="password"
+                                className="form-control"
+                                value={user.password}
+                                onChange={ev => setUser({...user, password: ev.target.value})}
+                                placeholder="Password"
+                            />
+                        </div>
+                        <button className="btn btn-primary w-100">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </>
+    );
 }

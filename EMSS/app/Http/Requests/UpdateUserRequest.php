@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password; 
+
 
 class UpdateUserRequest extends FormRequest
 {
@@ -20,17 +22,19 @@ class UpdateUserRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'Emri' => 'required|string|max:255',
-            'Mbiemri' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$this->id,
-            'password' => [
-                Password::min(8)
-                    ->letters()
-                    ->symbols()
-            ],
-            'Roli' => 'required|string|max:255',
-        ];
-    }
+{
+    return [
+        'Emri' => 'required|string|max:255',
+        'Mbiemri' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $this->route('user')->id,
+        'password' => [
+            'nullable',
+            Password::min(8)
+                ->letters()
+                ->symbols()
+        ],
+        'Roli' => 'required|string|max:255',
+    ];
+}
+
 }

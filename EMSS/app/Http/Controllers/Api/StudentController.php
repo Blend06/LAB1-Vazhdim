@@ -48,13 +48,18 @@ class StudentController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
-        if(isset($data['password'])){
-            $data['password'] = bcrypt($data['password']);
+    
+        if (empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['password']);  
         }
+    
         $user->update($data);
-
+    
         return new StudentResource($user);
     }
+    
 
     /**
      * Remove the specified resource from storage.

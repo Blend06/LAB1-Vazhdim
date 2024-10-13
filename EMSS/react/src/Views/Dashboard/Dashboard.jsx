@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './dashboard.module.css';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../../Footer.jsx';
@@ -8,9 +8,11 @@ import { useStateContext } from '../../Contexts/ContextProvider.jsx';
 export default function Dashboard() {
     const {token} = useStateContext();
     const navigate = useNavigate();
-    if(!token){
-        navigate('/');
-    }
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
     return  (
        <>
        <Header /> 
@@ -22,6 +24,7 @@ export default function Dashboard() {
         <Link to="/dashboard/drejtor">Drejtor</Link>
         <Link to="/dashboard/viti">Viti</Link>
         <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link>
+        
 
        </aside>
        <main>

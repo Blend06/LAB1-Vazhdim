@@ -20,6 +20,8 @@ class StudentResource extends JsonResource
             'Emri' => $this->Emri,
             'Mbiemri' => $this->Mbiemri,
             'email' => $this->email,
+            'password' => $this->password,
+            'Roli'=> $this->Roli,
             'Viti' => $this->Viti,
             'Mesatarja' => $this->Mesatarja,
             'created_at' => $this->created_at->format('Y-m-d H:i:s')
