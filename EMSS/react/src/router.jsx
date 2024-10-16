@@ -8,6 +8,9 @@ import Aboutus from "./Views/Homepage/Aboutus";
 import Profile from "./Views/Dashboard/profile";
 import Student from './Views/Dashboard/student'; 
 import StudentForm from './Views/Dashboard/StudentForm'; 
+import Drejtori from "./Views/Dashboard/drejtori";
+import DrejtoriForm from './Views/Dashboard/DrejtoriForm'; 
+
 
 
 
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
               {
                 path: 'student/:id',
                 element: <StudentForm key="userUpdate"/>
+              },
+              {
+                path: 'drejtori',
+                element: <Drejtori/>
+              },
+              {
+                path: 'drejtori/new',
+                element: <DrejtoriForm key="userCreate"/>
+              },
+              {
+                path: 'drejtori/:id',
+                element: <DrejtoriForm key="userUpdate"/>
               }
         ]
     },
