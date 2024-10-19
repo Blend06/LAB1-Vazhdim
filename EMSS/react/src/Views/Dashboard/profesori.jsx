@@ -3,33 +3,33 @@ import axiosClient from "../../axios-client";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Drejtori() {
-  const [drejtori, setDrejtori] = useState([]);
+export default function Profesori() {
+  const [profesori, setProfesori] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getDrejtori();
+    getProfesori();
   }, []);
 
-  const onDelete = (d) => {
-    if (!window.confirm("Are you sure you want to delete this director?")) {
+  const onDelete = (p) => {
+    if (!window.confirm("Are you sure you want to delete this profesor?")) {
       return;
     }
-    axiosClient.delete(`/drejtori/${d.id}`)
+    axiosClient.delete(`/profesori/${d.id}`)
       .then(() => {
-        getDrejtori(); 
+        getProfesori(); 
       })
       .catch((error) => {
-        console.error("Error deleting director:", error.response.status, error.response.data);
+        console.error("Error deleting Profesor:", error.response.status, error.response.data);
       });
   };
 
-  const getDrejtori = () => {
+  const getProfesori = () => {
     setLoading(true);
-    axiosClient.get('/drejtori')
+    axiosClient.get('/profesori')
       .then(({ data }) => {
         setLoading(false);
-        setDrejtori(data.data);
+        setProfesori(data.data);
       })
       .catch(() => {
         setLoading(false);
@@ -38,8 +38,8 @@ export default function Drejtori() {
 
   return (
     <div>
-      <h1>Drejtori</h1>
-      <Link to={"/dashboard/drejtori/new"}>Add new</Link>
+      <h1>Profesori</h1>
+      <Link to={"/dashboard/profesori/new"}>Add new</Link>
       <div className="card animated fadeInDown">
         <table>
           <thead>
@@ -48,6 +48,7 @@ export default function Drejtori() {
               <th>Emri</th>
               <th>Mbiemri</th>
               <th>Email</th>
+              <th>Specializimi</th>
               <th>Created_at</th>
             </tr>
           </thead>
@@ -59,16 +60,17 @@ export default function Drejtori() {
             </tbody>
           )}
           <tbody>
-            {drejtori.map(d => (
-              <tr key={d.id}>
-                <td>{d.id}</td>
-                <td>{d.Emri}</td>
-                <td>{d.Mbiemri}</td>
-                <td>{d.email}</td>
-                <td>{d.created_at}</td>
+            {profesori.map(p => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.Emri}</td>
+                <td>{p.Mbiemri}</td>
+                <td>{p.email}</td>
+                <td>{p.Specializimi}</td>
+                <td>{p.created_at}</td>
                 <td>
-                  <Link className="btn btn-primary btn-sm" to={`/dashboard/drejtori/${d.id}`}>Edit</Link>
-                  <button onClick={() => onDelete(d)} className="btn btn-danger btn-sm">Delete</button>
+                  <Link className="btn btn-primary btn-sm" to={`/dashboard/profesori/${p.id}`}>Edit</Link>
+                  <button onClick={() => onDelete(p)} className="btn btn-danger btn-sm">Delete</button>
                 </td>
               </tr>
             ))}

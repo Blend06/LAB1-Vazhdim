@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DrejtoriResource extends JsonResource
+class ProfesoriResource extends JsonResource
 {
     public static $wrap = false;
     /**
@@ -23,6 +23,7 @@ class DrejtoriResource extends JsonResource
             'password' => $this->password,
             'Roli'=> $this->Roli,
             'Viti' => $this->Viti,
+            'Specializimi' => $this->Specializimi,
             'Mesatarja' => $this->Mesatarja,
             'created_at' => $this->created_at->format('Y-m-d H:i:s')
         ];

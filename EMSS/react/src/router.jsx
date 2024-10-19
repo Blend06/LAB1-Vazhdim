@@ -10,6 +10,8 @@ import Student from './Views/Dashboard/student';
 import StudentForm from './Views/Dashboard/StudentForm'; 
 import Drejtori from "./Views/Dashboard/drejtori";
 import DrejtoriForm from './Views/Dashboard/DrejtoriForm'; 
+import Profesori from "./Views/Dashboard/profesori";
+import ProfesoriForm from "./Views/Dashboard/ProfesoriForm";
 
 
 
@@ -62,6 +64,18 @@ const router = createBrowserRouter([
               {
                 path: 'drejtori/:id',
                 element: <DrejtoriForm key="userUpdate"/>
+              },
+              {
+                path: 'profesori',
+                element: <Profesori/>
+              },
+              {
+                path: 'profesori/new',
+                element: <ProfesoriForm key="userCreate"/>
+              },
+              {
+                path: 'profesori/:id',
+                element: <ProfesoriForm key="userUpdate"/>
               }
         ]
     },

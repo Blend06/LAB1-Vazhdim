@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Api\ProfesoriController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -15,6 +16,9 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
     Route::apiResource('/drejtori', DrejtoriController::class)->parameters([
         'drejtori' => 'user',
+    ]);;
+    Route::apiResource('/profesori', ProfesoriController::class)->parameters([
+        'profesori' => 'user',
     ]);;
 });
 

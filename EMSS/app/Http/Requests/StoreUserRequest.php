@@ -33,6 +33,7 @@ class StoreUserRequest extends FormRequest
                     ->symbols()
             ],
             'Roli' => 'required|string|max:255',
+            'Specializimi' => 'nullable|string|max:255',
         ];
     }
 }
