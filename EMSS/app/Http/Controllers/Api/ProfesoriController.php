@@ -16,7 +16,7 @@ class ProfesoriController extends Controller
     public function index()
     {
         return ProfesoriResource::collection(
-            User::query()->where('Roli', 'Profesor')->get()
+        User::query()->where('Roli', 'Profesor')->get()
         );
     }
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\DrejtoriController;
+use App\Http\Controllers\Api\LendaController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -21,6 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
         'profesori' => 'user',
     ]);;
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('/lenda', LendaController::class);
+});
+
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

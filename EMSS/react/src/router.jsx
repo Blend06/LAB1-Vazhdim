@@ -12,6 +12,8 @@ import Drejtori from "./Views/Dashboard/drejtori";
 import DrejtoriForm from './Views/Dashboard/DrejtoriForm'; 
 import Profesori from "./Views/Dashboard/profesori";
 import ProfesoriForm from "./Views/Dashboard/ProfesoriForm";
+import Lenda from "./Views/Dashboard/lenda";
+import LendaForm from "./Views/Dashboard/LendaForm";
 
 
 
@@ -76,6 +78,18 @@ const router = createBrowserRouter([
               {
                 path: 'profesori/:id',
                 element: <ProfesoriForm key="userUpdate"/>
+              },
+              {
+                path: 'lenda',
+                element: <Lenda/>
+            },
+            {
+                path: 'lenda/new',
+                element: <LendaForm key="lendaCreate"/>
+              },
+              {
+                path: 'lenda/:id',
+                element: <LendaForm key="lendaUpdate"/>
               }
         ]
     },

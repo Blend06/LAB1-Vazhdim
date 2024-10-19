@@ -22,9 +22,9 @@ export default function Dashboard() {
         <Link to="/dashboard/student">Student</Link>
         <Link to="/dashboard/profesori">Professor</Link>
         <Link to="/dashboard/drejtori">Drejtor</Link>
+        <Link to="/dashboard/lenda">Lenda</Link>
         {user.Viti === null ? ( <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link> ) :
         (<Link to="/dashboard/viti">Viti</Link> )}
-        
         
        </aside>
        <main>
