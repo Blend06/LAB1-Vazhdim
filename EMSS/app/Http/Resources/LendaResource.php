@@ -18,7 +18,8 @@ class LendaResource extends JsonResource
         return[
     'id' => $this->id,
             'emri' => $this->emri,
-            'viti' => $this->viti
+            'viti' => $this->viti,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s')
         ];
     }
 }

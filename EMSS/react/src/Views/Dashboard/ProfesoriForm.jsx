@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function ProfesoriForm() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [Lenda, setLenda] = useState([]);
     const [user, setUser] = useState({
         id: null,
         Emri: '',
@@ -14,6 +15,19 @@ export default function ProfesoriForm() {
         password: '',
         Specializimi: '',
     });
+
+    useEffect(() => {
+        getLenda();
+      }, []);
+
+      const getLenda = () => {
+        axiosClient.get('/lenda')
+          .then(({ data }) => {
+            setLenda(data.data);
+          })
+          .catch(() => {
+          });
+      };
 
     useEffect(() => {
         if (id) {
@@ -118,14 +132,19 @@ export default function ProfesoriForm() {
                             />
                         </div>
                         <div className="mb-3">
-                            <input 
-                                type="text"
+                        <select 
                                 className="form-control"
                                 value={user.Specializimi} 
                                 onChange={ev => setUser({ ...user, Specializimi: ev.target.value })} 
-                                placeholder="Specializimi" 
                                 required
-                            />
+                            >
+                                <option value="" disabled>Zgjidh Lenden</option>
+                                {Lenda.map((Lenda) => (
+                                    <option key={Lenda.id} value={Lenda.emri}>
+                                     {Lenda.emri}
+                                    </option>
+                                    ))}
+                            </select>
                         </div>
                         <button className="btn btn-primary w-100">Save</button>
                     </form>

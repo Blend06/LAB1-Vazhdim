@@ -14,6 +14,8 @@ import Profesori from "./Views/Dashboard/profesori";
 import ProfesoriForm from "./Views/Dashboard/ProfesoriForm";
 import Lenda from "./Views/Dashboard/lenda";
 import LendaForm from "./Views/Dashboard/LendaForm";
+import Orari from "./Views/Dashboard/orari";
+import OrariForm from "./Views/Dashboard/OrariForm";
 
 
 
@@ -90,6 +92,18 @@ const router = createBrowserRouter([
               {
                 path: 'lenda/:id',
                 element: <LendaForm key="lendaUpdate"/>
+              },
+              {
+                path: 'orari',
+                element: <Orari/>
+            },
+            {
+                path: 'orari/new',
+                element: <OrariForm key="orariCreate"/>
+              },
+              {
+                path: 'orari/:id',
+                element: <OrariForm key="orariUpdate"/>
               }
         ]
     },
