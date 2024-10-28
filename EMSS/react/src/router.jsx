@@ -16,6 +16,8 @@ import Lenda from "./Views/Dashboard/lenda";
 import LendaForm from "./Views/Dashboard/LendaForm";
 import Orari from "./Views/Dashboard/orari";
 import OrariForm from "./Views/Dashboard/OrariForm";
+import Orariim from "./Views/Dashboard/orariim";
+
 
 
 
@@ -104,6 +106,10 @@ const router = createBrowserRouter([
               {
                 path: 'orari/:id',
                 element: <OrariForm key="orariUpdate"/>
+              },
+              {
+                path: 'orariim/',
+                element: <Orariim/>
               }
         ]
     },

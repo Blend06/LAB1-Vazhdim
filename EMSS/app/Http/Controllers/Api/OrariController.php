@@ -7,6 +7,8 @@ use App\Http\Resources\OrariResource;
 use App\Models\Orari;
 use App\Http\Requests\StoreOrariRequest;
 use App\Http\Requests\UpdateOrariRequest;
+use Illuminate\Http\Request;
+
 
 class OrariController extends Controller
 {
@@ -60,5 +62,11 @@ class OrariController extends Controller
         $orari->delete();
 
         return response("", 204);
+    }
+
+    public function getOrariByViti($viti) {
+      
+       $orari  = Orari::where('viti', $viti)->get();
+       return new OrariResource($orari);
     }
 }
