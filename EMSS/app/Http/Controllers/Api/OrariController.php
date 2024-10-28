@@ -67,6 +67,6 @@ class OrariController extends Controller
     public function getOrariByViti($viti) {
       
        $orari  = Orari::where('viti', $viti)->get();
-       return new OrariResource($orari);
+       return OrariResource::collection($orari);
     }
 }

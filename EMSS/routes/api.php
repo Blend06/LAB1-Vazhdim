@@ -31,7 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/orari', OrariController::class);
     
-    Route::get('/orari/{viti}', [OrariController::class, 'getOrariByViti']);
+    Route::get('/orari/viti/{viti}', [OrariController::class, 'getOrariByViti']);
+
 });
 
 

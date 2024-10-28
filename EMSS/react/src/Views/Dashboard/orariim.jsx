@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axiosClient from "../../axios-client";
-import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useStateContext } from '../../Contexts/ContextProvider.jsx';
 
@@ -18,10 +17,10 @@ export default function Orariim() {
     
   const getOrari = () => {
     setLoading(true);
-    axiosClient.get(`/orari/${user.Viti}`)
+    axiosClient.get(`/orari/viti/${user.Viti}`)
       .then(({ data }) => {
         console.log("API Response:", data); 
-        setOrari(data);
+        setOrari(data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -51,7 +50,7 @@ export default function Orariim() {
             </tbody>
           )}
           <tbody>
-          {console.log("Rendered Orari:", Orari)}``
+          {console.log("Rendered Orari:", Orari)}
             {Orari.map(d => (
             <tr key={d.id}>
             <td>{d.ora}</td>
