@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/lenda', LendaController::class);
+
+    Route::get('/lenda/viti/{viti}', [LendaController::class, 'getLendaByViti']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

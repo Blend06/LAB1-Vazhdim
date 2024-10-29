@@ -17,6 +17,7 @@ import LendaForm from "./Views/Dashboard/LendaForm";
 import Orari from "./Views/Dashboard/orari";
 import OrariForm from "./Views/Dashboard/OrariForm";
 import Orariim from "./Views/Dashboard/orariim";
+import Ligjerata from "./Views/Dashboard/ligjerata";
 
 
 
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
               {
                 path: 'orariim/',
                 element: <Orariim/>
+              },
+              {
+                path: 'ligjerata/',
+                element: <Ligjerata/>
               }
         ]
     },

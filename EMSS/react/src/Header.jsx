@@ -35,7 +35,27 @@ function Header() {
                         {token ? (
                             <>
                             <li><Link to="/dashboard/profile">Profile</Link></li>
-                            <button onClick={onLogout}>Logout</button>
+                            
+                        <button 
+        onClick={onLogout} 
+        className="btn btn-light" 
+            style={{
+            borderRadius: '5px', 
+            backgroundColor: '#ffffff', 
+            color: '#178ca4', 
+            transition: 'background-color 0.3s, color 0.3s', 
+        }} 
+            onMouseEnter={e => {
+            e.currentTarget.style.backgroundColor = '#178ca4'; 
+            e.currentTarget.style.color = '#ffffff';
+        }} 
+            onMouseLeave={e => {
+            e.currentTarget.style.backgroundColor = '#ffffff'; 
+            e.currentTarget.style.color = '#178ca4'; 
+        }}
+        >
+            Logout
+        </button>
                         </>
                         ) : (
                             <li><Link to="/login">Profile</Link></li>

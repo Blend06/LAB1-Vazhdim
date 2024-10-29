@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useStateContext } from '../../Contexts/ContextProvider.jsx';
@@ -28,38 +28,38 @@ export default function Orariim() {
         setLoading(false);
       });
   };
-  
 
   return (
-    <div>
-      <h1>Orari im</h1>
-      <div className="card animated fadeInDown">
-        <table>
-          <thead>
+    <div className="container my-5"> {/* Centered container with margin on top and bottom */}
+      <div className="text-center mb-4"> {/* Center-align header and add bottom margin */}
+        <h1 style={{ fontWeight: 'bold' }}>Orari im</h1> {/* Bold header */}
+      </div>
+      <div className="card p-3 shadow-sm animated fadeInDown"> {/* Card with padding and shadow effect */}
+        <table className="table table-striped table-bordered text-center"> {/* Bootstrap table with striping and borders */}
+          <thead style={{ backgroundColor: '#178ca4', color: '#FFFFFF', fontWeight: 'bold' }}> {/* Inline styles for header */}
             <tr>
               <th>Ora</th>
               <th>Dita</th>
               <th>Lenda</th>
-              </tr>
+            </tr>
           </thead>
           {loading && (
             <tbody>
               <tr>
-                <td colSpan="5" className="text-center">Loading...</td>
+                <td colSpan="3" className="text-center">Loading...</td> {/* Updated colspan to match number of columns */}
               </tr>
             </tbody>
           )}
           <tbody>
-          {console.log("Rendered Orari:", Orari)}
+            {console.log("Rendered Orari:", Orari)}
             {Orari.map(d => (
-            <tr key={d.id}>
-            <td>{d.ora}</td>
-            <td>{d.dita}</td>
-            <td>{d.lenda}</td>
-      </tr>
-          )) 
-        }
-</tbody>
+              <tr key={d.id}>
+                <td>{d.ora}</td>
+                <td>{d.dita}</td>
+                <td>{d.lenda}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

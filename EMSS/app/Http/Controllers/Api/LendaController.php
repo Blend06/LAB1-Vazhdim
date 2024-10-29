@@ -56,5 +56,12 @@ class LendaController extends Controller
     {
         $lenda->delete();
 
-        return response("", 204);    }
+        return response("", 204);
+    }
+
+    public function getLendaByViti($viti) {
+      
+        $lenda  = Lenda::where('viti', $viti)->get();
+        return LendaResource::collection($lenda);
+     }
 }
