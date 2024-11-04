@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './dashboard.module.css';
 
 export default function LendaForm() {
     const { id } = useParams();

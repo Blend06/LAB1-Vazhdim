@@ -11,16 +11,16 @@ export default function Ligjerata() {
   const { user } = useStateContext(); 
 
   useEffect(() => {
-    if (user?.Viti) { 
-      getLenda();
-    }
+    getLenda();
   }, [user?.Viti]);
-    
+  
   const getLenda = () => {
     setLoading(true);
-    axiosClient.get(`/lenda/viti/${user.Viti}`)
+    const endpoint = user?.Viti ? `/lenda/viti/${user.Viti}` : '/lenda'; // Check if Viti exists
+  
+    axiosClient.get(endpoint)
       .then(({ data }) => {
-        console.log("API Response:", data); 
+        console.log("API Response:", data);
         setLenda(data.data);
         setLoading(false);
       })
@@ -29,6 +29,7 @@ export default function Ligjerata() {
         setLoading(false);
       });
   };
+  
 
   return (
     <div className="text-center mb-4">

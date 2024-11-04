@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Api\LigjerataController;
 use App\Http\Controllers\Api\OrariController;
 use App\Http\Controllers\Api\ProfesoriController;
 use Illuminate\Http\Request;
@@ -34,6 +35,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/orari', OrariController::class);
     
     Route::get('/orari/viti/{viti}', [OrariController::class, 'getOrariByViti']);
+
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('/ligjerata', LigjerataController::class);
+    
+    Route::get('/ligjerata/lenda/{Lenda}', [LigjerataController::class, 'getLigjeratabyLenda']);
 
 });
 

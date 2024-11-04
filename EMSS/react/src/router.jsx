@@ -19,6 +19,7 @@ import OrariForm from "./Views/Dashboard/OrariForm";
 import Orariim from "./Views/Dashboard/orariim";
 import Ligjerata from "./Views/Dashboard/ligjerata";
 import ZgjedhVitin from "./Views/Dashboard/zgjedhvitin";
+import LigjerataPage from "./Views/Dashboard/ligjerataPage";
 
 
 
@@ -120,7 +121,11 @@ const router = createBrowserRouter([
               {
                 path: 'zgjedhvitin/',
                 element: <ZgjedhVitin/>
-              }
+              },
+              {
+                path: 'ligjerata/:Lenda',
+                element: <LigjerataPage/>
+              },
         ]
     },
     {

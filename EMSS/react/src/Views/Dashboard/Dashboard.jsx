@@ -24,7 +24,7 @@ export default function Dashboard() {
         <Link to="/dashboard/drejtori">Drejtor</Link>
         <Link to="/dashboard/lenda">Lenda</Link>
         <Link to="/dashboard/orari">Orari</Link>
-        {user.Viti === null ? ( <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link> ) :
+        {user.Viti === null && user.Roli === 'Student' ? ( <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link> ) :
         (
         <>
         <Link to="/dashboard/orariim">Orari im</Link> 

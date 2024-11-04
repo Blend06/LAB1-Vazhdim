@@ -16,7 +16,12 @@ export default function Profile() {
             <p>Nota mesatare: {user.Mesatarja}</p>
           </div>
         </div>
+
+        
+        
         </>
+
+        
         ) : (
           <>
           <div className={styles.profileDashboard}>
@@ -31,6 +36,9 @@ export default function Profile() {
         )
       }
          
+         
         </>
+        
     )
+    
 }
