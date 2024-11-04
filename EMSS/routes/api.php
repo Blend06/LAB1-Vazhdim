@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\DrejtoriController;
 use App\Http\Controllers\Api\LendaController;
+use App\Http\Controllers\Api\NotaController;
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -45,7 +47,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+Route::middleware('auth:sanctum')->group(function(): void{
+    Route::apiResource('/nota', NotaController::class );
 
+    Route::get('/nota/user/{user_id}', [NotaController::class, 'getNotaByUser']);
+});
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

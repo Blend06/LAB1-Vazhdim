@@ -20,9 +20,7 @@ import Orariim from "./Views/Dashboard/orariim";
 import Ligjerata from "./Views/Dashboard/ligjerata";
 import ZgjedhVitin from "./Views/Dashboard/zgjedhvitin";
 import LigjerataPage from "./Views/Dashboard/ligjerataPage";
-
-
-
+import Nota from "./Views/Dashboard/nota";
 
 
 const router = createBrowserRouter([
@@ -126,6 +124,10 @@ const router = createBrowserRouter([
                 path: 'ligjerata/:Lenda',
                 element: <LigjerataPage/>
               },
+              {
+                path: 'nota',
+                element:<Nota/>
+              }
         ]
     },
     {
