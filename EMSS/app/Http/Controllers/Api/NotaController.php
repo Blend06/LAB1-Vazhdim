@@ -67,4 +67,23 @@ class NotaController extends Controller
         $nota  = Nota::where('user_id', $user_id)->get();   
         return  NotaResource::collection($nota);
     }
+
+    public function getAverageNotaByUser($user_id)
+{
+    $notas = Nota::where('user_id', $user_id)->pluck('Nota');
+
+    if ($notas->isEmpty()) {
+        return response()->json([
+            'user_id' => $user_id,
+            'average_nota' => 0 
+        ]);
+    }
+
+    $average = $notas->average();
+
+    return response()->json([
+        'user_id' => $user_id,
+        'average_nota' => round($average, 2) // Rounded to 2 decimal places
+    ]);
+}
 }

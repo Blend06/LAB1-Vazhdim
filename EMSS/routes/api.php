@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function(): void{
     Route::apiResource('/nota', NotaController::class );
 
     Route::get('/nota/user/{user_id}', [NotaController::class, 'getNotaByUser']);
+    Route::get('/average/user/{user_id}', [NotaController::class, 'getAverageNotaByUser']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

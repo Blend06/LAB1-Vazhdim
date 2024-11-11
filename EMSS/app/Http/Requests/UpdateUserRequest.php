@@ -35,7 +35,8 @@ class UpdateUserRequest extends FormRequest
         ],
         'Roli' => 'required|string|max:255',
         'Specializimi' => 'nullable|string|max:255',
-        'Viti' => 'nullable|integer|min:1|max:3'
+        'Viti' => 'nullable|integer|min:1|max:3',
+        'Mesatarja' => 'nullable|numeric|min:1|max:5.0'
     ];
 }
 

@@ -14,6 +14,8 @@
   margin-bottom: 20px;
 }
 
+
+
 .profileInfo p {
   display: flex;
   justify-content:flex-start;/* Ensures labels and values are in a straight line */

@@ -6,13 +6,21 @@ import { useStateContext } from '../../Contexts/ContextProvider.jsx';
 
 export default function Nota() {
   const [Nota, setNota] = useState([]);
+  const[Average, setAverage] = useState(null);
   const [loading, setLoading] = useState(false);
   const {user} = useStateContext();
 
 
   useEffect(() => {
     getNota();
+    getAverage();
   }, []);
+
+  useEffect(() => {
+    if (Average !== null) {
+      updateStudentData();
+    }
+  }, [Average]);
 
   const getNota = () => {
     setLoading(true);
@@ -20,6 +28,41 @@ export default function Nota() {
       .then(({ data }) => {
         console.log("API Response:", data); 
         setNota(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orari:", error);
+        setLoading(false);
+      });
+  };
+
+  const updateStudentData = async () => {
+
+  try {
+    const updateData = {
+      Emri: user.Emri,
+      Mbiemri: user.Mbiemri,
+      email: user.email,
+      password: user.password,
+      Roli: 'Student',
+      Mesatarja: Average
+    };
+    console.log(updateData);
+
+    const response = await axiosClient.put(`/students/${user.id}`, updateData);
+    console.log('Student updated successfully');
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }  
+};
+
+
+  const getAverage = () => {
+    setLoading(true);
+    axiosClient.get(`/average/user/${user.id}`)
+      .then(({ data }) => {
+        console.log("API Response:", data); 
+        setAverage(data.average_nota);
         setLoading(false);
       })
       .catch((error) => {
@@ -54,11 +97,15 @@ export default function Nota() {
               <tr key={d.id}>
                 <td>{d.user_id}</td>
                 <td>{d.Lenda}</td>
-                <td>{d.Nota}</td>
+                <td>{d.Nota}</td> 
+          
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="text-center mt-4">
+          <h5>Mesatarja: {Average !== null ? Average : "No data available"}</h5>
+        </div>
       </div>
     </div>
   );
