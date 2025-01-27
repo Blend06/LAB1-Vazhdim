@@ -22,7 +22,7 @@ class StoreNotaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|unsignedBigInteger',
+            'user_id' => 'required|integer|exists:users,id',
             'Lenda' => 'required|string|max:255',
             'Nota' => 'required|integer'
         ];

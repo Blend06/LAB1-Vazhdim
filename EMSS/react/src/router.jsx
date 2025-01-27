@@ -21,6 +21,8 @@ import Ligjerata from "./Views/Dashboard/ligjerata";
 import ZgjedhVitin from "./Views/Dashboard/zgjedhvitin";
 import LigjerataPage from "./Views/Dashboard/ligjerataPage";
 import Nota from "./Views/Dashboard/nota";
+import NotaPage from "./Views/Dashboard/NotaPage";
+import NotaForm from "./Views/Dashboard/NotaForm";
 
 
 const router = createBrowserRouter([
@@ -127,7 +129,19 @@ const router = createBrowserRouter([
               {
                 path: 'nota',
                 element:<Nota/>
-              }
+              },
+              {
+                path: 'notapage',
+                element:<NotaPage/>
+              },
+              {
+                path: 'notapage/new',
+                element: <NotaForm key="notaCreate"/>
+              },
+              {
+                path: 'notapage/:id',
+                element: <NotaForm key="notaUpdate"/>
+              },
         ]
     },
     {

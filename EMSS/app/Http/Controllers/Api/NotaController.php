@@ -34,10 +34,18 @@ class NotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Nota $nota)
-    {
-        return new NotaResource($nota);
+    public function show($id)
+{
+    \Log::info('ID received:', ['id' => $id]);
+    $nota = Nota::find($id);
+
+    if (!$nota) {
+        return response()->json(['message' => 'Nota not found'], 404);
     }
+
+    return new NotaResource($nota);
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -70,20 +78,26 @@ class NotaController extends Controller
 
     public function getAverageNotaByUser($user_id)
 {
-    $notas = Nota::where('user_id', $user_id)->pluck('Nota');
+    $nota = Nota::where('user_id', $user_id)->pluck('Nota');
 
-    if ($notas->isEmpty()) {
+    if ($nota->isEmpty()) {
         return response()->json([
             'user_id' => $user_id,
             'average_nota' => 0 
         ]);
     }
 
-    $average = $notas->average();
+    $average = $nota->average();
 
     return response()->json([
         'user_id' => $user_id,
         'average_nota' => round($average, 2) // Rounded to 2 decimal places
     ]);
+}
+
+public function getNotaByLenda($lenda)
+{
+    $notas = Nota::where('Lenda', $lenda)->get(); // Fetch full objects
+    return NotaResource::collection($notas);
 }
 }
