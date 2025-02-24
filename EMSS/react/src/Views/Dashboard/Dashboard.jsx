@@ -20,7 +20,7 @@ export default function Dashboard() {
        <aside className={styles.aside} style={{ backgroundColor: '#178ca4', borderRadius: '5px', height: '1000px' }}>
         <Link to="/dashboard/profile">Profile</Link>
 
-        {user.Roli === 'Student' ?
+        {user.Roli === 'Student' && user.Viti !== null ?
         (
             <>
             <Link to="/dashboard/nota">Transkripta</Link>
@@ -37,7 +37,7 @@ export default function Dashboard() {
         </>
         )}
 
-        {user.Roli == 'Drejtor' ? 
+        {user.Roli === 'Drejtor' ? 
         (
             <>
                 <Link to="/dashboard/student">Student</Link>
@@ -50,7 +50,7 @@ export default function Dashboard() {
         <></>
         }
 
-        {user.Roli == 'Professor' ?
+        {user.Roli === 'Profesor' ?
         (
             <>
                 <Link to="/dashboard/notapage">Vendos Noten</Link>

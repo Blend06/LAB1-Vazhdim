@@ -16,6 +16,7 @@ export default function Profile() {
           <div className={styles.profileDashboard}>
           <div className={styles.profileInfo}>
           <div className={styles.profileDashboard}></div>
+          <p>ID: {user.id}</p>
             <p>Emri: {user.Emri}</p>
             <p>Mbiemri: {user.Mbiemri}</p>
             <p>Viti: {user.Viti}</p>

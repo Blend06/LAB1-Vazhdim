@@ -14,7 +14,7 @@ export default function NotaPage() {
   }, []);
 
   const onDelete = (d) => {
-    if (!window.confirm("Are you sure you want to delete this subject?")) {
+    if (!window.confirm("Are you sure you want to delete this grade?")) {
       return;
     }
     axiosClient.delete(`/nota/${d.id}`)

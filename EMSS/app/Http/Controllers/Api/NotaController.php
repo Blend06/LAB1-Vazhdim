@@ -64,12 +64,15 @@ class NotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nota $nota)
-    {
+    public function destroy($id)
+{
+    $nota = Nota::find($id);
+    if ($nota) {
         $nota->delete();
-
-        return response("", 204);
+        return response()->json(['message' => 'Deleted successfully']);
     }
+    return response()->json(['message' => 'Nota not found'], 404);
+}
 
     public function getNotaByUser($user_id){
         $nota  = Nota::where('user_id', $user_id)->get();   

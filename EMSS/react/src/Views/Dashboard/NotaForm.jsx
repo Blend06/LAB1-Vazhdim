@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function NotaForm() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [students, setStudents] = useState([]);
     const  { user, setUser } = useStateContext();
     const [Nota, setNota] = useState({
         id: null,
@@ -15,6 +16,23 @@ export default function NotaForm() {
         Lenda: '',
         Nota: '',
     });
+
+    useEffect(() => {
+        getStudents();
+      }, []);
+
+    const getStudents = () => {
+        
+        axiosClient.get('/students')
+          .then(({ data }) => {
+            
+            console.log(data);
+            setStudents(data.data);
+          })
+          .catch(() => {
+            
+          });
+      };
 
     useEffect(() => {
         if (id) {
@@ -71,24 +89,34 @@ export default function NotaForm() {
                     <h1 className="text-center">{Nota.id ? `Update Nota` : 'Create Nota'}</h1>
                     <form onSubmit={onSubmit} className="text-center">
                         <div className="mb-3">
-                            <input 
-                                type="number"
+                        <select 
                                 className="form-control"
                                 value={Nota.user_id} 
                                 onChange={ev => setNota({ ...Nota, user_id: ev.target.value })} 
-                                placeholder="Studenti"
                                 required
-                            />
+                            >
+                                <option value="" disabled>Studenti</option>
+                                {students.map((students) => (
+                                    <option key={students.id} value={students.id}>
+                                     {students.Emri} : {students.id}
+                                    </option>
+                                    ))}
+                            </select>
                         </div>
                         <div className="mb-3">
-                            <input 
-                                type="number"
+                            <select 
                                 className="form-control"
                                 value={Nota.Nota} 
                                 onChange={ev => setNota({ ...Nota, Nota: ev.target.value })} 
-                                placeholder="Nota" 
                                 required
-                            />
+                            >
+                                <option value="" disabled>Nota</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                </select>
                         </div>
                         <button className="btn btn-primary w-100">Save</button>
                     </form>
