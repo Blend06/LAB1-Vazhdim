@@ -40,7 +40,6 @@ export default function ZgjedhVitin() {
                     <h1 className="text-center">Përzgjedh Vitin</h1>
                     <form onSubmit={onSubmit} className="text-center">
                         <div className="form-group">
-                            <label htmlFor="viti">Viti</label>
                             <select
                                 id="viti"
                                 className="form-control"

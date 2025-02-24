@@ -19,20 +19,46 @@ export default function Dashboard() {
        <div className={styles.layout} style={{display : 'flex'}}>
        <aside className={styles.aside} style={{ backgroundColor: '#178ca4', borderRadius: '5px', height: '1000px' }}>
         <Link to="/dashboard/profile">Profile</Link>
-        <Link to="/dashboard/student">Student</Link>
-        <Link to="/dashboard/profesori">Professor</Link>
-        <Link to="/dashboard/drejtori">Drejtor</Link>
-        <Link to="/dashboard/lenda">Lenda</Link>
-        <Link to="/dashboard/orari">Orari</Link>
-        <Link to="/dashboard/notapage">Vendos Noten</Link>
-        {user.Viti === null && user.Roli === 'Student' ? ( <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link> ) :
+
+        {user.Roli === 'Student' ?
+        (
+            <>
+            <Link to="/dashboard/nota">Transkripta</Link>
+            <Link to="/dashboard/orariim">Orari im</Link> 
+            <Link to="/dashboard/ligjerata">Ligjerata</Link>
+            </>
+        ):
+        <></>
+        }
+        {user.Viti === null && user.Roli === 'Student' ? 
+        ( <Link to="/dashboard/zgjedhvitin">Perzgjedh vitin </Link> ):
         (
         <>
-        <Link to="/dashboard/nota">Notat</Link>
-        <Link to="/dashboard/orariim">Orari im</Link> 
-        <Link to="/dashboard/ligjerata">Ligjerata</Link>
         </>
         )}
+
+        {user.Roli == 'Drejtor' ? 
+        (
+            <>
+                <Link to="/dashboard/student">Student</Link>
+                <Link to="/dashboard/profesori">Professor</Link>
+                <Link to="/dashboard/drejtori">Drejtor</Link>
+                <Link to="/dashboard/lenda">Lenda</Link>
+                <Link to="/dashboard/orari">Orari</Link>
+            </>
+        ):
+        <></>
+        }
+
+        {user.Roli == 'Professor' ?
+        (
+            <>
+                <Link to="/dashboard/notapage">Vendos Noten</Link>
+                <Link to="/dashboard/ligjerata">Ligjerata</Link>
+            </>
+        ):
+        <></>
+        }
        </aside>
        <main>
         <Outlet/>
