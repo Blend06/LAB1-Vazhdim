@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * php artisan make:migration create_Nota_table
      */
     public function up(): void
     {

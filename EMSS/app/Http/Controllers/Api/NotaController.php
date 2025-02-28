@@ -9,6 +9,10 @@ use App\Http\Requests\StoreNotaRequest;
 use App\Http\Requests\UpdateNotaRequest;
 use Illuminate\Http\Request;
 
+/**
+ * php artisan make:controller Api/LigjeruesiController --model=Nota --requests --resource --api
+ * php artisan make:resource NotaResource
+ */
 
 class NotaController extends Controller
 {
